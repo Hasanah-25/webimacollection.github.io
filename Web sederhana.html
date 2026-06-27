@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>web sederhana</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --sage: #b5c9a8;
+        --sage-light: #d4e4cb;
+        --sage-pale: #edf4e9;
+        --sage-deep: #7a9e70;
+        --cream: #faf7f2;
+        --blush: #f5ede8;
+        --rose: #e8c5b8;
+        --text-dark: #3a3a3a;
+        --text-mid: #6b6b6b;
+        --text-light: #9a9a9a;
+        --white: #ffffff;
+        --nav-h: 68px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--cream);
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+
+      /* ── NAVBAR ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--nav-h);
+        background: rgba(250, 247, 242, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(181, 201, 168, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5vw;
+        z-index: 1000;
+      }
+
+      .nav-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--sage-deep);
+        letter-spacing: 0.02em;
+        text-decoration: none;
+      }
+
+      .nav-logo span {
+        font-style: italic;
+        font-weight: 400;
+        color: var(--rose);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--text-mid);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        transition: color 0.25s;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 1.5px;
+        background: var(--sage-deep);
+        transform: scaleX(0);
+        transition: transform 0.25s;
+      }
+
+      .nav-links a:hover {
+        color: var(--sage-deep);
+      }
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .nav-cart {
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--sage-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .nav-cart:hover {
+        background: var(--sage-pale);
+      }
+      .nav-cart svg {
+        width: 18px;
+        height: 18px;
+        stroke: var(--sage-deep);
+        fill: none;
+        stroke-width: 1.5;
+      }
+
+      /* ── HERO ── */
+      #beranda {
+        min-height: 100vh;
+        padding-top: var(--nav-h);
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url("/mnt/user-data/uploads/backround3.avif");
+        background-size: cover;
+        background-position: center top;
+        filter: brightness(0.88) saturate(0.9);
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          105deg,
+          rgba(250, 247, 242, 0.78) 40%,
+          rgba(181, 201, 168, 0.18) 100%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 6vw 8vw;
+        max-width: 600px;
+      }
+
+      .hero-eyebrow {
+        display: inline-block;
+        background: var(--sage-pale);
+        border: 1px solid var(--sage-light);
+        color: var(--sage-deep);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        border-radius: 20px;
+        margin-bottom: 1.4rem;
+      }
+
+      .hero-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        font-weight: 600;
+        line-height: 1.18;
+        color: var(--text-dark);
+        margin-bottom: 1.2rem;
+      }
+
+      .hero-title em {
+        font-style: italic;
+        color: var(--sage-deep);
+      }
+
+      .hero-sub {
+        font-size: 1rem;
+        color: var(--text-mid);
+        line-height: 1.7;
+        margin-bottom: 2.2rem;
+        max-width: 440px;
+      }
+
+      .btn-primary {
+        display: inline-block;
+        background: var(--sage-deep);
+        color: var(--white);
+        font-size: 0.88rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        padding: 14px 32px;
+        border-radius: 40px;
+        text-decoration: none;
+        transition:
+          background 0.25s,
+          transform 0.2s;
+      }
+      .btn-primary:hover {
+        background: #688f5e;
+        transform: translateY(-1px);
+      }
+
+      .btn-outline {
+        display: inline-block;
+        border: 1.5px solid var(--sage-deep);
+        color: var(--sage-deep);
+        font-size: 0.88rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        padding: 13px 28px;
+        border-radius: 40px;
+        text-decoration: none;
+        margin-left: 1rem;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .btn-outline:hover {
+        background: var(--sage-pale);
+      }
+
+      /* ── TENTANG ── */
+      #tentang {
+        padding: 6rem 8vw;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        background: var(--white);
+      }
+
+      .about-tag {
+        display: inline-block;
+        background: var(--blush);
+        color: #b07a6e;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        border-radius: 20px;
+        margin-bottom: 1.2rem;
+      }
+
+      .about-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        font-weight: 600;
+        line-height: 1.3;
+        margin-bottom: 1.2rem;
+      }
+
+      .about-body {
+        font-size: 0.95rem;
+        color: var(--text-mid);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+
+      .about-values {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .about-val {
+        background: var(--sage-pale);
+        border: 1px solid var(--sage-light);
+        border-radius: 12px;
+        padding: 1rem 1.2rem;
+      }
+      .about-val-title {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--sage-deep);
+        margin-bottom: 4px;
+      }
+      .about-val-body {
+        font-size: 0.8rem;
+        color: var(--text-mid);
+        line-height: 1.5;
+      }
+
+      .about-img-wrap {
+        position: relative;
+      }
+
+      .about-img-wrap img {
+        width: 80%;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 20px;
+      }
+
+      /* ── PRODUK ── */
+      #produk {
+        padding: 6rem 8vw;
+        background: var(--cream);
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+      }
+
+      .section-tag {
+        display: inline-block;
+        background: var(--sage-pale);
+        border: 1px solid var(--sage-light);
+        color: var(--sage-deep);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 600;
+      }
+
+      .section-sub {
+        color: var(--text-mid);
+        font-size: 0.95rem;
+        margin-top: 0.6rem;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.8rem;
+      }
+
+      .product-card {
+        background: var(--white);
+        border-radius: 18px;
+        overflow: hidden;
+        transition:
+          transform 0.28s,
+          box-shadow 0.28s;
+        cursor: pointer;
+        border: 1px solid rgba(181, 201, 168, 0.25);
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(122, 158, 112, 0.15);
+      }
+
+      .product-img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s;
+      }
+
+      .product-card:hover .product-img {
+        transform: scale(1.04);
+      }
+
+      .product-img-wrap {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .product-badge-new {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: var(--sage-deep);
+        color: var(--white);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+
+      .product-badge-sale {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: #d4816a;
+        color: var(--white);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+
+      .wishlist-btn {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 32px;
+        height: 32px;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+      }
+      .wishlist-btn:hover {
+        background: var(--white);
+      }
+
+      .product-info {
+        padding: 1.2rem 1.4rem 1.5rem;
+      }
+
+      .product-category {
+        font-size: 0.72rem;
+        color: var(--text-light);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+
+      .product-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: var(--text-dark);
+      }
+
+      .product-desc {
+        font-size: 0.82rem;
+        color: var(--text-mid);
+        line-height: 1.5;
+        margin-bottom: 14px;
+      }
+
+      .product-colors {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+
+      .color-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+      }
+
+      .product-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .product-price {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--sage-deep);
+      }
+
+      .product-price-old {
+        font-size: 0.8rem;
+        color: var(--text-light);
+        text-decoration: line-through;
+        margin-left: 6px;
+      }
+
+      .add-btn {
+        background: var(--sage-pale);
+        border: 1px solid var(--sage-light);
+        color: var(--sage-deep);
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          color 0.2s;
+        letter-spacing: 0.04em;
+      }
+      .add-btn:hover {
+        background: var(--sage-deep);
+        color: var(--white);
+      }
+
+      /* ── KONTAK ── */
+      #kontak {
+        padding: 6rem 8vw;
+        background: var(--white);
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4rem;
+        align-items: start;
+      }
+
+      .contact-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .contact-body {
+        font-size: 0.95rem;
+        color: var(--text-mid);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .contact-items {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .contact-icon {
+        width: 44px;
+        height: 44px;
+        background: var(--sage-pale);
+        border: 1px solid var(--sage-light);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+
+      .contact-item-label {
+        font-size: 0.78rem;
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+      .contact-item-val {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+
+      .contact-form {
+        background: var(--cream);
+        border-radius: 20px;
+        padding: 2.2rem;
+        border: 1px solid rgba(181, 201, 168, 0.3);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .form-group label {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-mid);
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        font-family: "Inter", sans-serif;
+        font-size: 0.9rem;
+        padding: 11px 14px;
+        border: 1.5px solid rgba(181, 201, 168, 0.5);
+        border-radius: 10px;
+        background: var(--white);
+        color: var(--text-dark);
+        outline: none;
+        transition: border-color 0.2s;
+        resize: vertical;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        border-color: var(--sage-deep);
+      }
+
+      .form-group textarea {
+        min-height: 110px;
+      }
+
+      .form-full {
+        margin-bottom: 1rem;
+      }
+
+      .submit-btn {
+        width: 100%;
+        background: var(--sage-deep);
+        color: var(--white);
+        font-family: "Inter", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition: background 0.2s;
+        margin-top: 0.4rem;
+      }
+      .submit-btn:hover {
+        background: #688f5e;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: #2d3d2a;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 3rem 8vw 2rem;
+      }
+
+      .footer-inner {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .footer-brand {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
+        color: var(--white);
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-brand span {
+        font-style: italic;
+        color: var(--rose);
+      }
+
+      .footer-tagline {
+        font-size: 0.85rem;
+        line-height: 1.7;
+      }
+
+      .footer-col h4 {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--white);
+        margin-bottom: 1rem;
+      }
+
+      .footer-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .footer-col ul a {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        font-size: 0.88rem;
+        transition: color 0.2s;
+      }
+      .footer-col ul a:hover {
+        color: var(--white);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 1.4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+      }
+
+      /* ── WA FLOAT ── */
+      .wa-float {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        background: #25d366;
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        box-shadow: 0 4px 18px rgba(37, 211, 102, 0.4);
+        cursor: pointer;
+        transition: transform 0.2s;
+        text-decoration: none;
+      }
+      .wa-float:hover {
+        transform: scale(1.08);
+      }
+      .wa-float svg {
+        width: 28px;
+        height: 28px;
+        fill: white;
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 768px) {
+        #tentang,
+        #kontak {
+          grid-template-columns: 1fr;
+        }
+        .footer-inner {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .promo-banner {
+          flex-direction: column;
+          padding: 2rem;
+          text-align: center;
+        }
+        nav {
+          padding: 0 4vw;
+        }
+        .nav-links {
+          gap: 1.4rem;
+        }
+        .about-img-wrap img {
+          height: 300px;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .nav-links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <a href="#beranda" class="nav-logo">Ima <span>Collection</span></a>
+      <ul class="nav-links">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#produk">Produk</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+      <div class="nav-cart" title="Keranjang">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+      </div>
+    </nav>
+
+    <!-- BERANDA / HERO -->
+    <section id="beranda">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-eyebrow">Koleksi Terbaru 2026</span>
+        <h1 class="hero-title">
+          Tampil <em>Anggun</em> &amp; Syar'i Setiap Hari
+        </h1>
+        <p class="hero-sub">
+          Busana muslim pilihan dengan bahan premium, desain elegan, dan
+          kenyamanan sepanjang hari — untuk ibu &amp; buah hati tercinta.
+        </p>
+        <a href="#produk" class="btn-primary">Lihat Koleksi</a>
+        <a href="#tentang" class="btn-outline">Tentang Kami</a>
+      </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section id="tentang">
+      <div>
+        <span class="about-tag">Tentang Kami</span>
+        <h2 class="about-title">Kami Hadir untuk Keanggunan Muslimah</h2>
+        <p class="about-body">
+          Ima Collection lahir dari kecintaan terhadap fashion muslim yang tidak
+          hanya indah, tetapi juga nyaman dikenakan sepanjang hari. Setiap
+          jahitan kami rancang dengan penuh ketelitian dan rasa cinta.
+        </p>
+        <p class="about-body">
+          Dari Busana muslim dewasa hingga busana anak, kami memastikan setiap
+          koleksi membawa kebahagiaan dan kepercayaan diri bagi pemakainya.
+        </p>
+        <div class="about-values">
+          <div class="about-val">
+            <div class="about-val-title">Bahan Premium</div>
+            <div class="about-val-body">
+              Kain pilihan yang lembut, adem, dan tahan lama untuk kenyamanan
+              harian.
+            </div>
+          </div>
+          <div class="about-val">
+            <div class="about-val-title">Jahitan Rapi</div>
+            <div class="about-val-body">
+              Setiap pakaian dijahit dengan detail presisi oleh penjahit
+              berpengalaman.
+            </div>
+          </div>
+          <div class="about-val">
+            <div class="about-val-title">Pengiriman Cepat</div>
+            <div class="about-val-body">
+              Siap kirim ke seluruh Indonesia dalam 1–3 hari kerja.
+            </div>
+          </div>
+          <div class="about-val">
+            <div class="about-val-title">Garansi Kepuasan</div>
+            <div class="about-val-body">
+              jika tidak puas,Kami jamin pengembalian mudah tanpa ribet.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-img-wrap">
+        <img src="gambar/img2.jpg" />
+      </div>
+    </section>
+
+    <!-- PRODUK -->
+    <section id="produk">
+      <div class="section-header">
+        <span class="section-tag">Koleksi Pilihan</span>
+        <h2 class="section-title">Produk Kami</h2>
+        <p class="section-sub">
+          Gamis terbaik untuk ibu &amp; anak, hadir dalam berbagai pilihan warna
+          yang memesona
+        </p>
+      </div>
+
+      <div class="product-grid">
+        <!-- Produk 1 -->
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img
+              class="product-img"
+              src="gambar/img4.jpg"
+              alt="Gamis putih ima set"
+            />
+            <span class="product-badge-new">Baru</span>
+          </div>
+          <div class="product-info">
+            <div class="product-category">Gamis Dewasa</div>
+            <div class="product-name">Ima set — white</div>
+            <div class="product-desc">
+              Set gamis dengan detail belt di pinggang . Bahan Rayon premium.
+            </div>
+            <div class="product-colors">
+              <div
+                class="color-dot"
+                style="background: #b5c9a8"
+                title="Matcha"
+              ></div>
+              <div
+                class="color-dot"
+                style="background: #e8c5b8"
+                title="Blush"
+              ></div>
+              <div
+                class="color-dot"
+                style="background: #f1f0f3"
+                title="white"
+              ></div>
+              <div
+                class="color-dot"
+                style="background: #d4c9b8"
+                title="Cream"
+              ></div>
+            </div>
+            <div class="product-footer">
+              <span>
+                <span class="product-price">Rp125.000</span>
+                <span class="product-price-old">Rp 215.000</span>
+              </span>
+              <button class="add-btn">+ Keranjang</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Produk 2 -->
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img
+              class="product-img"
+              src="gambar/img6.jpg"
+              alt="Gamis Anak Ima Kids"
+            />
+            <span class="product-badge-sale">Sale</span>
+          </div>
+          <div class="product-info">
+            <div class="product-category">Gamis Anak</div>
+            <div class="product-name">Ima Kids — Sage pearl</div>
+            <div class="product-desc">
+              Gamis anak dengan detail pita &amp; payet halus. Lengkap dengan
+              hijab serasi, usia 3–10 tahun.
+            </div>
+            <div class="product-colors">
+              <div
+                class="color-dot"
+                style="background: #b5c9a8"
+                title="Sage"
+              ></div>
+              <div
+                class="color-dot"
+                style="background: #f5c5d0"
+                title="Pink Muda"
+              ></div>
+              <div
+                class="color-dot"
+                style="background: #c5d4e8"
+                title="Baby Blue"
+              ></div>
+            </div>
+            <div class="product-footer">
+              <span>
+                <span class="product-price">Rp 115.000</span>
+                <span class="product-price-old">Rp 230.000</span>
+              </span>
+              <button class="add-btn">+ Keranjang</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Produk 3 (variasi) -->
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img
+              class="product-img"
+              src="gambar/abaya.webp"
+              alt="Abaya Turki - black"
+              style="object-position: top"
+            />
+          </div>
+          <div class="product-info">
+            <div class="product-category">Gamis Abaya</div>
+            <div class="product-name">Abaya Turki — Black</div>
+            <div class="product-desc">
+              Warna Hitam elegan, cocok untuk acara formal maupun kasual.
+              Tersedia S–XXL.
+            </div>
+            <div class="product-colors">
+              <div
+                class="color-dot"
+                style="background: #e8c5b8"
+                title="Blush Rose"
+              ></div>
+              <div
+                class="color-dot"
+                style="background: #d4b8a8"
+                title="Nude"
+              ></div>
+              <div
+                class="color-dot"
+                style="background: #0c0f0a"
+                title="black"
+              ></div>
+            </div>
+            <div class="product-footer">
+              <span>
+                <span class="product-price">Rp 285.000</span>
+              </span>
+              <button class="add-btn">+ Keranjang</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Produk 4 -->
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img
+              class="product-img"
+              src="gambar/one set.jpeg"
+              alt="Ima one set"
+              style="object-position: top"
+            />
+            <span class="product-badge-new">Best Seller</span>
+          </div>
+          <div class="product-info">
+            <div class="product-category">One Set</div>
+            <div class="product-name">Ima One Set — Mouve</div>
+            <div class="product-desc">
+              Desain casual lembut, sempurna untuk Lebaran atau acara keluarga.
+              Set + hijab.
+            </div>
+            <div class="product-colors">
+              <div
+                class="color-dot"
+                style="background: #eab9da"
+                title="Mouve"
+              ></div>
+              <div
+                class="color-dot"
+                style="background: #b5c9a8"
+                title="Sage"
+              ></div>
+              <div
+                class="color-dot"
+                style="background: #f5c5d0"
+                title="Pink"
+              ></div>
+            </div>
+            <div class="product-footer">
+              <span>
+                <span class="product-price">Rp 195.000</span>
+              </span>
+              <button class="add-btn">+ Keranjang</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section id="kontak">
+      <div>
+        <span class="about-tag">Hubungi Kami</span>
+        <h2 class="contact-title">Ada Pertanyaan? Kami Siap Membantu</h2>
+        <p class="contact-body">
+          Tim kami siap melayani Anda dengan sepenuh hati, Senin–Sabtu pukul
+          08.00–20.00 WIB.
+        </p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-item-label">Alamat</div>
+              <div class="contact-item-val">
+                Jl. Lingkar selatan, cipocok jaya, Kota Serang, Banten 42117
+              </div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <div class="contact-item-label">WhatsApp</div>
+              <div class="contact-item-val">+62 123-4567-890</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-val">Ima@Collection.id</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <div class="contact-item-label">Jam Operasional</div>
+              <div class="contact-item-val">Senin–Sabtu, 08.00–20.00 WIB</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" placeholder="xxxxxxxxxx" />
+          </div>
+          <div class="form-group">
+            <label>Nomor HP</label>
+            <input type="tel" placeholder="08xx-xxxx-xxxx" />
+          </div>
+        </div>
+        <div class="form-group form-full">
+          <label>Email</label>
+          <input type="email" placeholder="contoh@email.com" />
+        </div>
+        <div class="form-group form-full">
+          <label>Produk yang Diminati</label>
+          <select>
+            <option value="">-- Pilih produk --</option>
+            <option>Ima Set – White</option>
+            <option>Ima Kids – Sage Pearl</option>
+            <option>Abaya Turki – Black</option>
+            <option>Ima One set – Mouve</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label>Pesan / Pertanyaan</label>
+          <textarea placeholder="Tulis pesan Anda di sini…"></textarea>
+        </div>
+        <button
+          class="submit-btn"
+          onclick="
+            alert(
+              'Pesan Anda telah terkirim! Kami akan menghubungi Anda segera.',
+            )
+          "
+        >
+          Kirim Pesan
+        </button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">Ima<span>Collection</span></div>
+          <p class="footer-tagline">
+            Busana muslim pilihan untuk ibu &amp; anak yang tampil anggun,
+            nyaman, dan penuh percaya diri setiap hari.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#tentang">Tentang Kami</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Bantuan</h4>
+          <ul>
+            <li><a href="#">Cara Pemesanan</a></li>
+            <li><a href="#">Tabel Ukuran</a></li>
+            <li><a href="#">Kebijakan Return</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Made in Indonesia</span>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a
+      class="wa-float"
+      href="https://wa.me/6281234567890"
+      target="_blank"
+      title="Chat WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"
+        />
+      </svg>
+    </a>
+  </body>
+</html>
